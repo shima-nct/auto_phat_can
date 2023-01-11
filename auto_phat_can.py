@@ -48,12 +48,12 @@ class DoorOperator(can.Listener):
     def on_message_received(self, msg):
         if msg.arbitration_id == DEFAULT_DOOR_ID:
             door_states = msg.data[DEFAULT_DOOR_POS]
-            print(msg.data)
-            for digit in range(4):
+            # print(msg.data)
+            for ch in range(4):
                 state = door_states & 0b0001
-                print(state)
+                # print(state)
                 door_states >>= 1
-                self.pi_servo_hat.move_servo_position(0, 90*state)
+                self.pi_servo_hat.move_servo_position(ch, 90*state)
 
 if __name__ == "__main__":
     main()
