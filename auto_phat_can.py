@@ -44,6 +44,8 @@ class DoorOperator(can.Listener):
         self.pi_servo_hat = pi_servo_hat.PiServoHat()
         if self.pi_servo_hat.PCA9685.is_connected() == False:
             raise Exception("The Qwiic PCA9685 device isn't connected to the system. Please check your connection")
+        else:
+            self.pi_servo_hat.restart()
 
     def on_message_received(self, msg):
         if msg.arbitration_id == DEFAULT_DOOR_ID:
